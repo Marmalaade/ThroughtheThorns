@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:layout_width="320dp"
+	android:layout_height="210dp"
+	android:background="@android:color/transparent"
+	android:gravity="center"
+	android:orientation="vertical">
+
+	<androidx.cardview.widget.CardView
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:layout_margin="5dp"
+		android:elevation="10dp"
+		app:cardCornerRadius="10dp">
+
+		<ImageView
+			android:id="@+id/roundedImageView"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:scaleType="centerCrop" />
+
+		<com.example.gboard.font.AppFontButton
+			android:id="@+id/choosetype"
+			android:layout_width="185dp"
+			android:layout_height="60dp"
+			android:layout_gravity="center |top"
+			android:background="@android:color/transparent"
+			android:shadowColor="@color/black"
+			android:shadowDx="4"
+			android:shadowDy="4"
+			android:shadowRadius="2"
+			android:text="Choose Mode"
+			android:textColor="@color/white"
+			android:textSize="24dp" />
+	</androidx.cardview.widget.CardView>
+
+	<android.widget.Button
+		android:id="@+id/startSinglePlayer"
+		android:layout_width="117dp"
+		android:layout_height="wrap_content"
+		android:layout_gravity="left    |bottom"
+		android:layout_marginLeft="20dp"
+		android:layout_marginBottom="30dp"
+		android:background="@drawable/custom_button"
+		android:fontFamily="@font/acme"
+		android:text="Single Player"
+		android:textAllCaps="false"
+		android:textColor="@color/white"
+		android:textStyle="bold" />
+
+	<android.widget.Button
+		android:id="@+id/startMultiPlayer"
+		android:layout_width="120dp"
+		android:layout_height="wrap_content"
+		android:layout_gravity="right |bottom"
+		android:layout_marginTop="20dp"
+		android:layout_marginRight="20dp"
+		android:layout_marginBottom="30dp"
+		android:background="@drawable/custom_button2"
+		android:text="Multi player"
+		android:textAllCaps="false"
+		android:textColor="@color/white"
+		android:textStyle="bold" />
+
+
+</FrameLayout>
+
+
