@@ -122,7 +122,7 @@ class GameView : View {
 					}
 				}, GboardActivity.handler)
 			} catch (e: IllegalArgumentException) {
-				Toast.makeText(context, "Pizdos", Toast.LENGTH_SHORT).show()
+				Toast.makeText(context, "Hi", Toast.LENGTH_SHORT).show()
 				e.printStackTrace()
 			}
 		}
