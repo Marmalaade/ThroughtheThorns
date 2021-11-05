@@ -19,9 +19,23 @@ android {
 	}
 
 	buildTypes {
-		release {
+		debug {
 			minifyEnabled false
+			shrinkResources false
+			jniDebuggable = true
+			debuggable = true
+			multiDexEnabled = false
+			signingConfig signingConfigs.debug
+			ndk {
+				debuggable = true
+			}
+		}
+		release {
+			minifyEnabled true
+			shrinkResources true
+			zipAlignEnabled true
 			proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+			multiDexEnabled = false
 		}
 	}
 	compileOptions {
