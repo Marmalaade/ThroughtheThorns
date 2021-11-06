@@ -8,8 +8,8 @@ import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.PixelCopy
 import android.view.View
-import android.widget.Toast
 import androidx.annotation.RequiresApi
+import com.example.gboard.activities.GboardActivity
 import com.example.gboard.gameObjects.GameObject
 import com.example.gboard.players.GamePlayer
 import kotlin.math.pow
@@ -25,13 +25,11 @@ class GameView : View {
 
 	init {
 		setWillNotDraw(false)
-		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O)
-			isDrawingCacheEnabled = true
+		/*if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O)
+			isDrawingCacheEnabled = true*/
 	}
 
 	private var isFirstDraw = true
-	private var currX = 0f
-	private var currY = 0f
 
 	override fun onDraw(canvas: Canvas) {
 		if (level != null && players != null) {
@@ -39,6 +37,7 @@ class GameView : View {
 				players!!.forEach {
 					it.onMeasure(width, height)
 				}
+
 				var currX = width / (2f * players!![0].getHeight())
 				var currY = height / (2f * players!![0].getHeight()) - level!![0].getHeight() / 2f
 				level!!.forEach {
@@ -52,16 +51,6 @@ class GameView : View {
 			if (players!![0].isRunning()) {
 				val newX = -players!![0].getX() + width / 2f
 				val newY = -players!![0].getY() + height / 2f
-				if(currX < newX)
-					currX += 1f
-				else if(currX > newX)
-					currX -= 1f
-				if(currY < newY)
-					currY += 1f
-				else if(currY > newY)
-					currY -= 1f
-				//currX -= (currX - newX) / 30f
-				//currY -= (currY - newY) / 30f
 				canvas.translate(newX, newY)
 			} else if (players!![0].isDisappear()) players!![0].create(width / 2f, height / 2f)
 
@@ -76,11 +65,14 @@ class GameView : View {
 			}
 
 			if (!players!![0].isDisappear() && players!![0].isRunning()) {
-				if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
-					buildDrawingCache()
-					players!![0].isCollided(getDrawingCache(true), Color.BLACK)
+				if (Build.VERSION.SDK_INT > Build.VERSION_CODES.O) {
+					/*buildDrawingCache()
+					val bitmap = getDrawingCache(true)
+					if (bitmap != null) {
+						players!![0].isCollided(bitmap, Color.BLACK)
+					}
 					destroyDrawingCache()
-				} else {
+				} else {*/
 					getBitmap {
 						players!![0].isCollided(it, Color.BLACK)
 						it.recycle()
@@ -122,7 +114,6 @@ class GameView : View {
 					}
 				}, GboardActivity.handler)
 			} catch (e: IllegalArgumentException) {
-				Toast.makeText(context, "Hi", Toast.LENGTH_SHORT).show()
 				e.printStackTrace()
 			}
 		}

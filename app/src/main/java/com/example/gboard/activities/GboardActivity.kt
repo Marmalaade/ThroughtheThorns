@@ -1,4 +1,4 @@
-package com.example.gboard
+package com.example.gboard.activities
 
 import android.app.Activity
 import android.os.Bundle

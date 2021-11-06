@@ -7,12 +7,12 @@
 	<color name="teal_700">#FF018786</color>
 	<color name="black">#FF000000</color>
 	<color name="white">#FFFFFFFF</color>
-	<color name= "bg_first">#1c0e36</color>
-	<color name= "bg_second">#18034a</color>
-	<color name= "bg_third">#0d0129</color>
-	<color name= "pb_bg">#d4d4d4</color>
-	<color name= "pb_tint">#cc0070</color>
+	<color name="bg_first">#1c0e36</color>
+	<color name="bg_second">#18034a</color>
+	<color name="bg_third">#0d0129</color>
+	<color name="pb_bg">#d4d4d4</color>
+	<color name="pb_tint">#cc0070</color>
 	<color name="yellow">#e3c502</color>
-	<color name ="loading_bar">#b89002</color>
+	<color name="loading_bar">#b89002</color>
 
 </resources>

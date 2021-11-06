@@ -1,114 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
-	android:layout_width="match_parent"
+	android:layout_width="350dp"
 	android:layout_height="230dp"
-	android:background="@android:color/transparent"
-	android:gravity="center"
-	android:orientation="vertical">
+	android:layout_gravity="center"
+	android:elevation="10dp"
+	app:cardCornerRadius="12dp"
+	app:cardPreventCornerOverlap="false">
 
-	<androidx.cardview.widget.CardView
-		android:layout_width="wrap_content"
+	<View
+		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		android:layout_margin="5dp"
-		android:elevation="10dp"
-		app:cardCornerRadius="10dp">
+		android:background="@drawable/background" />
 
-		<ImageView
-			android:id="@+id/roundedImageViewSettings"
-			android:layout_width="405dp"
-			android:layout_height="match_parent"
-			android:scaleType="centerCrop" />
+	<com.example.gboard.font.AppFontTextView
+		android:id="@+id/settings_view"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center_horizontal"
+		android:layout_marginTop="15dp"
+		android:background="@android:color/transparent"
+		android:shadowColor="@color/black"
+		android:shadowDx="4"
+		android:shadowDy="4"
+		android:shadowRadius="2"
+		android:text="Settings"
+		android:textColor="@color/white"
+		android:textSize="24dp" />
 
-		<CheckBox
-			android:id="@+id/music_checkbox"
-			android:layout_width="wrap_content"
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_gravity="bottom"
+		android:layout_marginStart="20dp"
+		android:layout_marginEnd="20dp"
+		android:layout_marginBottom="20dp"
+		android:orientation="vertical">
+
+		<LinearLayout
+			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:layout_gravity="center"
-			android:layout_marginLeft="120dp"
-			android:layout_marginBottom="46dp"
-			android:buttonTint="@color/yellow" />
+			android:layout_marginBottom="10dp"
+			android:orientation="horizontal">
 
-		<com.example.gboard.font.FontTextView
-			android:id="@+id/music_tool"
-			android:layout_width="185dp"
-			android:layout_height="60dp"
-			android:layout_gravity="center |left"
-			android:layout_marginLeft="30dp"
-			android:layout_marginBottom="34dp"
-			android:background="@android:color/transparent"
-			android:shadowColor="@color/black"
-			android:shadowDx="4"
-			android:shadowDy="4"
-			android:shadowRadius="2"
-			android:text="music:"
-			android:textColor="@color/white"
-			android:textSize="24dp" />
+			<com.example.gboard.font.AppFontTextView
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:background="@android:color/transparent"
+				android:shadowColor="@color/black"
+				android:shadowDx="4"
+				android:shadowDy="4"
+				android:shadowRadius="2"
+				android:text="Music:"
+				android:textColor="@color/white"
+				android:textSize="24dp" />
 
+			<CheckBox
+				android:id="@+id/music_checkbox"
+				android:layout_width="wrap_content"
+				android:layout_height="match_parent"
+				android:layout_gravity="end"
+				android:buttonTint="@color/yellow" />
 
-		<com.example.gboard.font.FontTextView
-			android:id="@+id/snake_colotText"
-			android:layout_width="185dp"
-			android:layout_height="60dp"
-			android:layout_gravity="center |left"
-			android:layout_marginLeft="30dp"
-			android:layout_marginTop="10dp"
-			android:background="@android:color/transparent"
-			android:shadowColor="@color/black"
-			android:shadowDx="4"
-			android:shadowDy="4"
-			android:shadowRadius="2"
-			android:text="snake color:"
-			android:textColor="@color/white"
-			android:textSize="24dp" />
+		</LinearLayout>
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="20dp"
+			android:orientation="horizontal">
+
+			<com.example.gboard.font.AppFontTextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:gravity="center"
+				android:shadowColor="@color/black"
+				android:shadowDx="4"
+				android:shadowDy="4"
+				android:shadowRadius="2"
+				android:text="Snake color:"
+				android:textColor="@color/white"
+				android:textSize="24dp" />
+
+			<com.divyanshu.colorseekbar.ColorSeekBar
+				android:id="@+id/color_seekbar"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:layout_gravity="center"
+				android:layout_marginStart="10dp"
+				android:background="@android:color/transparent" />
+
+		</LinearLayout>
 
 		<com.example.gboard.font.AppFontButton
-			android:id="@+id/settings_view"
-			android:layout_width="185dp"
-			android:layout_height="60dp"
-			android:layout_gravity="center |top"
-			android:background="@android:color/transparent"
-			android:shadowColor="@color/black"
-			android:shadowDx="4"
-			android:shadowDy="4"
-			android:shadowRadius="2"
-			android:text="Settings"
+			android:id="@+id/save_button"
+			android:layout_width="117dp"
+			android:layout_height="46dp"
+			android:layout_gravity="center"
+			android:background="@drawable/custom_button"
+			android:gravity="center"
+			android:text="Ok"
 			android:textColor="@color/white"
 			android:textSize="24dp" />
 
+	</LinearLayout>
 
-		<com.divyanshu.colorseekbar.ColorSeekBar
-			android:id="@+id/color_seekbar"
-			android:layout_width="250dp"
-			android:layout_height="wrap_content"
-			android:layout_gravity="center |bottom"
-			android:layout_marginBottom="67dp"
-			android:background="@android:color/transparent" />
-
-		<FrameLayout
-			android:id="@+id/circle_field"
-			android:layout_width="20dp"
-			android:layout_height="20dp"
-			android:layout_gravity="center"
-
-			android:layout_marginLeft="120dp"
-			android:background="@drawable/circle_field" />
-
-
-	</androidx.cardview.widget.CardView>
-	<android.widget.Button
-		android:id="@+id/save_button"
-		android:layout_width="117dp"
-		android:layout_height="wrap_content"
-		android:layout_gravity="center|bottom"
-		android:layout_marginBottom="17dp"
-		android:background="@drawable/custom_button"
-		android:fontFamily="@font/acme"
-		android:text="Save all"
-		android:textAllCaps="false"
-		android:textColor="@color/white"
-		android:textStyle="bold" />
-
-</FrameLayout>
-
-
+</androidx.cardview.widget.CardView>

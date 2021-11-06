@@ -1,51 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:id="@+id/main_background"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	android:background="@drawable/background"
-	tools:context=".MainActivity">
+	tools:context=".activities.MainActivity">
+
+	<ImageView
+		android:id="@+id/gameTittle"
+		android:layout_width="wrap_content"
+		android:layout_height="100dp"
+		android:layout_alignParentTop="true"
+		android:layout_centerHorizontal="true"
+		android:src="@drawable/tittle" />
 
 	<androidx.viewpager2.widget.ViewPager2
-		android:id="@+id/view_Pager_lvlSlider"
-		android:layout_width="420dp"
-		android:layout_height="400dp"
-		android:layout_gravity="center"
-		android:layout_marginTop="20dp"
-		android:paddingStart="70dp"
-		android:paddingEnd="70dp" />
+		android:id="@+id/pager_level_slider"
+		android:layout_width="match_parent"
+		android:layout_height="230dp"
+		android:layout_below="@id/gameTittle"
+		android:layout_centerHorizontal="true"
+		android:paddingStart="250dp"
+		android:paddingEnd="250dp" />
 
 	<ImageView
 		android:id="@+id/coin"
 		android:layout_width="47dp"
 		android:layout_height="32dp"
-		android:layout_gravity="bottom |left"
-		android:layout_marginLeft="10dp"
-		android:layout_marginBottom="10dp"
-		android:soundEffectsEnabled="false"
+		android:layout_alignParentStart="true"
+		android:layout_alignParentBottom="true"
+		android:layout_marginStart="10dp"
+		android:layout_marginBottom="15dp"
 		android:src="@drawable/ic_coin" />
 
-	<ImageButton
-		android:id="@+id/settings_button"
-		android:layout_width="60dp"
-		android:layout_height="wrap_content"
-		android:layout_gravity="top |left"
-		android:layout_marginLeft="11dp"
-		android:layout_marginTop="10dp"
-		android:background="@android:color/transparent"
-		android:soundEffectsEnabled="false"
-		android:src="@drawable/ic_setting_icon" />
-
-	<TextView
+	<com.example.gboard.font.AppFontTextView
 		android:id="@+id/coin_nubmer"
 		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_gravity="bottom|left"
-		android:layout_marginLeft="60dp"
+		android:layout_height="32dp"
+		android:layout_alignParentBottom="true"
 		android:layout_marginBottom="15dp"
-		android:fontFamily="@font/abril_fatface"
+		android:layout_toEndOf="@id/coin"
+		android:gravity="center"
+		android:padding="2dp"
 		android:shadowColor="@color/black"
 		android:shadowDx="4"
 		android:shadowDy="4"
@@ -54,15 +51,15 @@
 		android:textColor="@color/white"
 		android:textSize="20dp" />
 
-	<ImageView
-		android:id="@+id/gameTittle"
-		android:layout_width="wrap_content"
-		android:layout_height="120dp"
-		android:layout_gravity="center_horizontal |top  "
-		android:soundEffectsEnabled="false"
-		android:src="@drawable/tittle" />
+	<ImageButton
+		android:id="@+id/settings_button"
+		android:layout_width="60dp"
+		android:layout_height="wrap_content"
+		android:layout_alignParentStart="true"
+		android:layout_alignParentTop="true"
+		android:layout_marginStart="10dp"
+		android:layout_marginTop="10dp"
+		android:background="@android:color/transparent"
+		android:src="@drawable/ic_setting_icon" />
 
-
-
-
-</FrameLayout>
+</RelativeLayout>

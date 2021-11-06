@@ -1,27 +1,45 @@
-package com.example.gboard
+package com.example.gboard.activities
 
-import android.app.ActivityManager
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.WindowInsets
 import android.view.WindowInsetsController
 import android.view.WindowManager
+import com.example.gboard.data.Levels
+import com.example.gboard.R
 import com.example.gboard.players.Snake
 import kotlinx.android.synthetic.main.activity_game.*
 
 class GameActivity : GboardActivity() {
 
-	val levels by lazy {
+	private val levels by lazy {
 		Levels()
 	}
+
+	private var isMultiplayer = false
+	private var level = 0
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		setContentView(R.layout.activity_game)
-		gameView.level = levels.getLevel(0)
+		val arguments = intent.extras
+		if (arguments != null) {
+			level = arguments.getInt("Level", 0)
+			isMultiplayer = arguments.getBoolean("Multiplayer", false)
+		}
+		setBackground(level)
+
+		gameView.level = levels.getLevel(0/*level*/)
 		gameView.players = arrayOf(Snake())
+	}
+
+	private fun setBackground(index: Int) {
+		when (index) {
+			0 -> game_layout.setBackgroundResource(R.drawable.arctic)
+			1 -> game_layout.setBackgroundResource(R.drawable.desert)
+			2 -> game_layout.setBackgroundResource(R.drawable.jungle)
+		}
 	}
 
 	override fun onWindowFocusChanged(hasFocus: Boolean) {

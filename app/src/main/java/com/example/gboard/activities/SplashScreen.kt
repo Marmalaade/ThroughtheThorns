@@ -1,22 +1,19 @@
-package com.example.gboard
+package com.example.gboard.activities
 
+import android.annotation.SuppressLint
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import android.view.WindowManager
+import com.example.gboard.R
 import kotlinx.android.synthetic.main.activity_splash_sreeen.*
-import java.util.*
-import kotlin.concurrent.thread
-import java.util.TimerTask as TimerTask
+import java.util.Timer
+import java.util.TimerTask
 
-class SplashSreeen : AppCompatActivity() {
+@SuppressLint("CustomSplashScreen")
+class SplashScreen : GboardActivity() {
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		setContentView(R.layout.activity_splash_sreeen)
 		progressBarLoading()
-
 	}
 
 	private fun progressBarLoading() {
@@ -25,7 +22,6 @@ class SplashSreeen : AppCompatActivity() {
 		val limitValue = 100
 		val timer = Timer()
 		timer.schedule(object : TimerTask() {
-
 			override fun run() {
 				counter++
 				progressBar.progress = counter
@@ -36,7 +32,6 @@ class SplashSreeen : AppCompatActivity() {
 				}
 			}
 		}, 4, 10)
-
 	}
 
 }

@@ -30,8 +30,8 @@ class Direct(private val length: Float, private val _height: Float, angle: Int) 
 	override fun draw(canvas: Canvas, relativeSize: Float) {
 		val _x = x * relativeSize
 		val _y = y * relativeSize
-		canvas.drawLine(_x, _y, _x + length * relativeSize * cos, _y + length * relativeSize * sin, paint)
-		canvas.drawLine(_x, _y + _height * relativeSize, _x + length * relativeSize * cos, _y + length * relativeSize * sin + _height * relativeSize, paint)
+		canvas.drawLine(_x, _y, _x + length * relativeSize * cos, _y + length * relativeSize * sin, paint.apply { strokeWidth = relativeSize / 2f })
+		canvas.drawLine(_x, _y + _height * relativeSize, _x + length * relativeSize * cos, _y + length * relativeSize * sin + _height * relativeSize, paint.apply { strokeWidth = relativeSize / 2f })
 	}
 
 	override fun setPosition(relativeX: Float, relativeY: Float) {

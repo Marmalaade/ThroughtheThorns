@@ -5,6 +5,8 @@ import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
+import android.util.Log
+import com.example.gboard.FrameTimer
 
 class Snake : GamePlayer {
 
@@ -22,6 +24,10 @@ class Snake : GamePlayer {
 	private var _isRunning = false
 	private var _isCollided = false
 	private var _isDisappear = false
+	private var _size = 40
+	private val frameTimer = FrameTimer()
+	private var defaultVelocity = 0.5f
+	private var velocity = 0.5f
 
 	override fun create(startX: Float, startY: Float) {
 		_isRunning = false
@@ -36,11 +42,14 @@ class Snake : GamePlayer {
 
 	override fun draw(canvas: Canvas) {
 		var i = 0
+		val delta = frameTimer.getDeltaTime().toFloat()
+		val k = if (delta > 0) 11.1f / delta else 1f
+		velocity = defaultVelocity * k
 		while (i < lines.size) {
 			paint.strokeWidth = lines[i].width
 			canvas.drawLine(lines[i].x1, lines[i].y1, lines[i].x2, lines[i].y2, paint)
 			if (isRunning())
-				lines[i].width -= 0.5f
+				lines[i].width -= velocity
 			if (lines[i].width <= 0f) {
 				val line = lines[lines.size - 1]
 				if (!_isCollided)
@@ -58,7 +67,9 @@ class Snake : GamePlayer {
 
 	@SuppressLint("DrawAllocation")
 	override fun onMeasure(measuredWidth: Int, measuredHeight: Int) {
-		maxLineLength = 31104 / measuredWidth
+		_size = (40f * measuredWidth / 2280f).toInt()
+		defaultVelocity = 0.5f * 2280f / measuredWidth
+		maxLineLength = measuredWidth * 14 / 2280
 		create(measuredWidth / 2f, measuredHeight / 2f)
 	}
 
@@ -82,7 +93,7 @@ class Snake : GamePlayer {
 
 	override fun getMaxLength(): Int = maxLineLength
 
-	override fun getSize(): Int = 40
+	override fun getSize(): Int = _size
 
 	override fun isRunning(): Boolean = _isRunning
 

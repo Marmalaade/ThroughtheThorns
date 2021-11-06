@@ -6,7 +6,6 @@
 	android:id="@+id/imageSlide"
 	android:adjustViewBounds="true"
 	android:soundEffectsEnabled="false"
-	app:riv_corner_radius="12dp"
-	>
+	app:riv_corner_radius="12dp">
 
 </com.makeramen.roundedimageview.RoundedImageView>

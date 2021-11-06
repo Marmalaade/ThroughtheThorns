@@ -1,4 +1,4 @@
-package com.example.gboard
+package com.example.gboard.data
 
 import com.example.gboard.gameObjects.Direct
 import com.example.gboard.gameObjects.GameObject
