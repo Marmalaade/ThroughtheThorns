@@ -2,7 +2,7 @@
 	<!-- Base application theme. -->
 	<style name="Theme.Gboard" parent="android:Theme.DeviceDefault.NoActionBar">
 		<!-- Primary brand color. -->
-		<item name="colorPrimary">@color/purple_500</item>
+		<item name="android:colorPrimary">@color/purple_500</item>
 		<!-- Secondary brand color. -->
 		<item name="android:colorPrimaryDark">@color/purple_700</item>
 		<item name="android:colorAccent">@color/black</item>
@@ -12,5 +12,9 @@
 		<item name="android:windowFullscreen">true</item>
 		<item name="android:fitsSystemWindows">true</item>
 		<item name="android:windowTranslucentStatus">false</item>
+	</style>
+	<style name = "DialogScale">
+		<item name="android:windowEnterAnimation">@anim/scale_in</item>
+		<item name="android:windowExitAnimation">@anim/scale_down</item>
 	</style>
 </resources>

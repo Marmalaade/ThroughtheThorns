@@ -4,6 +4,14 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.1" />
+        <entry key="..\:/SoftProgramms/ASprojects/SnakeOrNotSnake/app/src/main/res/drawable/ic_play_button_svgrepo_com.xml" value="0.2755208333333333" />
+        <entry key="..\:/SoftProgramms/ASprojects/SnakeOrNotSnake/app/src/main/res/drawable/ic_setting_icon.xml" value="0.2755208333333333" />
+        <entry key="..\:/SoftProgramms/ASprojects/SnakeOrNotSnake/app/src/main/res/layout/activity_game.xml" value="0.1621376811594203" />
+        <entry key="..\:/SoftProgramms/ASprojects/SnakeOrNotSnake/app/src/main/res/layout/activity_main.xml" value="0.176" />
+        <entry key="..\:/SoftProgramms/ASprojects/SnakeOrNotSnake/app/src/main/res/layout/activity_splash_sreeen.xml" value="0.1621376811594203" />
+        <entry key="..\:/SoftProgramms/ASprojects/SnakeOrNotSnake/app/src/main/res/layout/custom_dialog.xml" value="0.1621376811594203" />
+        <entry key="..\:/SoftProgramms/ASprojects/SnakeOrNotSnake/app/src/main/res/layout/options_dialog.xml" value="0.264" />
+        <entry key="..\:/SoftProgramms/ASprojects/SnakeOrNotSnake/app/src/main/res/layout/slide_item_container.xml" value="0.1621376811594203" />
         <entry key="app/src/main/res/drawable/background.xml" value="0.11296296296296296" />
         <entry key="app/src/main/res/drawable/backgroundd.xml" value="0.2222222222222222" />
         <entry key="app/src/main/res/drawable/circle_field.xml" value="0.225" />

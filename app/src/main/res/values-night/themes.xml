@@ -2,7 +2,7 @@
 	<!-- Base application theme. -->
 	<style name="Theme.Gboard" parent="android:Theme.DeviceDefault.NoActionBar">
 		<!-- Primary brand color. -->
-		<item name="colorPrimary">@color/purple_500</item>
+		<item name="android:colorPrimary">@color/purple_500</item>
 		<!-- Secondary brand color. -->
 		<item name="android:colorPrimaryDark">@color/purple_700</item>
 		<item name="android:colorAccent">@color/black</item>

@@ -18,16 +18,18 @@ import kotlinx.android.synthetic.main.custom_dialog.*
 import kotlinx.android.synthetic.main.options_dialog.*
 import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
+import kotlin.math.abs
+import kotlinx.android.synthetic.main.slide_item_container.*
+
 
 class MainActivity : GboardActivity(), CoroutineScope {
-
 	private var job: Job = Job()
-
 	override val coroutineContext: CoroutineContext
 		get() = Dispatchers.Main + job
 
 	private val mediaPlayer by lazy {
 		MediaPlayer.create(this, R.raw.menu_music).apply {
+
 			isLooping = true
 		}
 	}
@@ -71,12 +73,11 @@ class MainActivity : GboardActivity(), CoroutineScope {
 			}
 		}
 	}
-
 	private val sliderAdapter by lazy {
 		val sliderItems: MutableList<SliderItem> = ArrayList()
-		sliderItems.add(SliderItem(R.drawable.arctic))
-		sliderItems.add(SliderItem(R.drawable.desert))
-		sliderItems.add(SliderItem(R.drawable.jungle))
+		sliderItems.add(SliderItem(R.drawable.arcticn))
+		sliderItems.add(SliderItem(R.drawable.desertn))
+		sliderItems.add(SliderItem(R.drawable.junglen))
 		SliderAdapter(sliderItems, pager_level_slider, object : OnPageClickListener {
 			override fun onPageClick(position: Int, sliderItem: SliderItem) {
 				when (position) {
@@ -91,7 +92,6 @@ class MainActivity : GboardActivity(), CoroutineScope {
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		setContentView(R.layout.activity_main)
-
 		alphaAnimation(gameTittle)
 
 		pager_level_slider.apply {
@@ -102,7 +102,7 @@ class MainActivity : GboardActivity(), CoroutineScope {
 			getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
 			setPageTransformer(CompositePageTransformer().apply {
 				addTransformer { page, position ->
-					val r = 1 - kotlin.math.abs(position)
+					val r = 1 - abs(position)
 					page.scaleY = 0.85f + r * 0.15f
 					page.scaleX = 0.85f + r * 0.15f
 					page.alpha = 0.5f + r * 0.5f
@@ -171,6 +171,7 @@ class MainActivity : GboardActivity(), CoroutineScope {
 			1 -> levelDialog.background_image.setBackgroundResource(R.drawable.desert)
 			2 -> levelDialog.background_image.setBackgroundResource(R.drawable.jungle)
 		}
+		levelDialog.window?.setWindowAnimations(R.style.DialogScale)
 		levelDialog.show()
 	}
 
@@ -200,8 +201,8 @@ class MainActivity : GboardActivity(), CoroutineScope {
 		if (value && Settings.soundEnabled && !mediaPlayer!!.isPlaying) {
 			mediaPlayer!!.start()
 		} else if (mediaPlayer!!.isPlaying) {
-			mediaPlayer!!.stop()
-			mediaPlayer!!.reset()
+			mediaPlayer!!.pause()
+			mediaPlayer!!.release()
 		}
 	}
 

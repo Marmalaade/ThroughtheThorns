@@ -5,6 +5,7 @@
 	android:layout_height="230dp"
 	android:layout_gravity="center"
 	android:elevation="10dp"
+	android:transitionName="transitioCardView"
 	app:cardCornerRadius="12dp">
 
 	<View
@@ -14,18 +15,19 @@
 		android:background="@drawable/desert" />
 
 	<com.example.gboard.font.AppFontTextView
-		android:layout_width="185dp"
+		android:layout_width="match_parent"
 		android:layout_height="60dp"
 		android:layout_gravity="center_horizontal"
 		android:layout_marginTop="15dp"
 		android:background="@android:color/transparent"
+		android:gravity="center"
 		android:shadowColor="@color/black"
 		android:shadowDx="4"
 		android:shadowDy="4"
 		android:shadowRadius="2"
 		android:text="Choose Mode"
 		android:textColor="@color/white"
-		android:textSize="24dp" />
+		android:textSize="30dp" />
 
 	<com.example.gboard.font.AppFontButton
 		android:id="@+id/startSinglePlayer"

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:id="@+id/main_background"
 	android:layout_width="match_parent"
@@ -22,7 +23,7 @@
 		android:layout_below="@id/gameTittle"
 		android:layout_centerHorizontal="true"
 		android:paddingStart="250dp"
-		android:paddingEnd="250dp" />
+		android:paddingEnd="250dp"></androidx.viewpager2.widget.ViewPager2>
 
 	<ImageView
 		android:id="@+id/coin"
