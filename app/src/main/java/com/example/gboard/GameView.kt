@@ -10,6 +10,7 @@ import android.view.PixelCopy
 import android.view.View
 import androidx.annotation.RequiresApi
 import com.example.gboard.activities.GboardActivity
+import com.example.gboard.data.Network
 import com.example.gboard.gameObjects.GameObject
 import com.example.gboard.players.GamePlayer
 import kotlin.math.pow
@@ -22,6 +23,7 @@ class GameView : View {
 
 	var players: Array<GamePlayer>? = null
 	var level: Array<GameObject>? = null
+	var isMultiplayer = false
 
 	init {
 		setWillNotDraw(false)
@@ -73,10 +75,10 @@ class GameView : View {
 					}
 					destroyDrawingCache()
 				} else {*/
-					getBitmap {
-						players!![0].isCollided(it, Color.BLACK)
-						it.recycle()
-					}
+//					getBitmap {
+//						players!![0].isCollided(it, Color.BLACK)
+//						it.recycle()
+//					}
 				}
 			}
 
@@ -88,14 +90,19 @@ class GameView : View {
 	override fun onTouchEvent(event: MotionEvent?): Boolean {
 		if (players != null) {
 			if (event?.actionMasked == MotionEvent.ACTION_DOWN) {
-				if (!players!![0].isRunning())
+				if (!players!![0].isRunning()) {
 					players!![0].setRunning(true)
+					if (isMultiplayer)
+						Network.sendStartFlag()
+				}
 			} else if (event?.actionMasked == MotionEvent.ACTION_MOVE) {
 				val difX = event.x - width / 2f
 				val difY = event.y - height / 2f
 				val len = sqrt(difX.pow(2) + difY.pow(2))
 				players!![0].setCos(difX / len)
 				players!![0].setSin(difY / len)
+				if (isMultiplayer)
+					Network.sendDirection(players!![0].getCos(), players!![0].getSin())
 			}
 		}
 		return true
