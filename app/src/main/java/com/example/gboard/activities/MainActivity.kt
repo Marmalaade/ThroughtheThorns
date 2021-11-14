@@ -45,14 +45,16 @@ class MainActivity : GboardActivity(), CoroutineScope {
 						.putExtra("Level", selectedLevel)
 				)
 				dismiss()
+				finish()
 			}
 			startMultiPlayer.setOnClickListener {
 				startActivity(
-					Intent(it.context, GameActivity::class.java)
-						.putExtra("Multiplayer", true)
+					Intent(it.context, ConnectionActivity::class.java)
 						.putExtra("Level", selectedLevel)
+						.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
 				)
 				dismiss()
+				finish()
 			}
 		}
 	}
@@ -75,9 +77,9 @@ class MainActivity : GboardActivity(), CoroutineScope {
 	}
 	private val sliderAdapter by lazy {
 		val sliderItems: MutableList<SliderItem> = ArrayList()
-		sliderItems.add(SliderItem(R.drawable.arcticn))
-		sliderItems.add(SliderItem(R.drawable.desertn))
-		sliderItems.add(SliderItem(R.drawable.junglen))
+		sliderItems.add(SliderItem(R.drawable.arctic))
+		sliderItems.add(SliderItem(R.drawable.desert))
+		sliderItems.add(SliderItem(R.drawable.jungle))
 		SliderAdapter(sliderItems, pager_level_slider, object : OnPageClickListener {
 			override fun onPageClick(position: Int, sliderItem: SliderItem) {
 				when (position) {
