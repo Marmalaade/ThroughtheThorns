@@ -14,7 +14,7 @@
 		<item name="android:windowTranslucentStatus">false</item>
 	</style>
 	<style name="DialogScale">
-		<!--<item name="android:windowEnterAnimation">@anim/scale_in</item>
-		<item name="android:windowExitAnimation">@anim/scale_down</item>-->
+		<item name="android:windowEnterAnimation">@anim/scale_in</item>
+		<item name="android:windowExitAnimation">@anim/scale_down</item>
 	</style>
 </resources>

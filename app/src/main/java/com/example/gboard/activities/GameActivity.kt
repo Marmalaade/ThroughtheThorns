@@ -1,5 +1,6 @@
 package com.example.gboard.activities
 
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -25,8 +26,8 @@ class GameActivity : GboardActivity() {
 
 	private var isMultiplayer = false
 	private var level = 0
-	private val multiPlayerSnakes: Array<GamePlayer> = arrayOf(Snake(), Snake())
-	private val snakes: Array<GamePlayer> = arrayOf(Snake())
+	private val multiPlayerSnakes: Array<GamePlayer> = arrayOf(Snake(Color.RED, 255), Snake(Color.BLUE, 150))
+	private val snakes: Array<GamePlayer> = arrayOf(Snake(Color.RED, 255))
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)

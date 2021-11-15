@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.makeramen.roundedimageview.RoundedImageView
+import kotlinx.android.synthetic.main.slide_item_container.view.*
 
 class SliderAdapter internal constructor(
 	sliderItems: MutableList<SliderItem>,
@@ -22,7 +23,7 @@ class SliderAdapter internal constructor(
 
 
 	class SliderViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-		private val imageView: RoundedImageView = itemView.findViewById(R.id.imageSlide)
+		private val imageView: RoundedImageView = itemView.imageSlide
 		fun image(sliderItem: SliderItem) {
 			imageView.setImageResource(sliderItem.image)
 		}

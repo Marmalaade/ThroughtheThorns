@@ -77,9 +77,9 @@ class MainActivity : GboardActivity(), CoroutineScope {
 	}
 	private val sliderAdapter by lazy {
 		val sliderItems: MutableList<SliderItem> = ArrayList()
-		sliderItems.add(SliderItem(R.drawable.arctic))
-		sliderItems.add(SliderItem(R.drawable.desert))
-		sliderItems.add(SliderItem(R.drawable.jungle))
+		sliderItems.add(SliderItem(R.drawable.arctic_named))
+		sliderItems.add(SliderItem(R.drawable.desert_named))
+		sliderItems.add(SliderItem(R.drawable.jungle_named))
 		SliderAdapter(sliderItems, pager_level_slider, object : OnPageClickListener {
 			override fun onPageClick(position: Int, sliderItem: SliderItem) {
 				when (position) {

@@ -1,18 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.makeramen.roundedimageview.RoundedImageView xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-android:id="@+id/imageSlide"
-android:adjustViewBounds="true"
-android:soundEffectsEnabled="false"
-app:riv_corner_radius="12dp">
-	<!--	<ImageButton-->
-	<!--		android:id="@+id/playButton"-->
-	<!--		android:layout_width="80dp"-->
-	<!--		android:layout_height="80dp"-->
-	<!--		android:layout_gravity="center"-->
-	<!--		android:layout_marginTop="8dp"-->
-	<!--		android:background="@drawable/ic_play_button_svgrepo_com" />-->
-	<!--	-->
-</com.makeramen.roundedimageview.RoundedImageView>
+	android:id="@+id/item_layout"
+xmlns:app="http://schemas.android.com/apk/res-auto">
+	<com.makeramen.roundedimageview.RoundedImageView
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:id="@+id/imageSlide"
+		android:adjustViewBounds="true"
+		android:soundEffectsEnabled="false"
+		app:riv_corner_radius="12dp"
+		/>
+		<ImageButton
+			android:id="@+id/playButton"
+			android:layout_width="160dp"
+			android:layout_height="160dp"
+			android:layout_gravity="center"
+			android:layout_marginTop="8dp"
+			android:background="@drawable/ic_play_button_svgrepo_com" />
+
+</FrameLayout>

@@ -8,12 +8,13 @@ import android.graphics.Paint
 import android.util.Log
 import com.example.gboard.FrameTimer
 
-class Snake : GamePlayer {
+class Snake(private val color: Int, private val alpha: Int) : GamePlayer {
 
 	private val lines = ArrayList<Line>()
 
 	private val paint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-		color = Color.RED
+		color = this@Snake.color
+		alpha = this@Snake.alpha
 		strokeWidth = 5f
 		strokeCap = Paint.Cap.ROUND
 	}
