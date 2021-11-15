@@ -65,12 +65,12 @@ object Network {
 		}
 	}
 
-	fun sendRequestToServer() {
+	fun sendRequestToServer(level: Byte) {
 		if (socket == null) {
 			socket = DatagramSocket()
 		}
 		tHandler.post {
-			socket?.send(DatagramPacket(byteArrayOf(CONNECTION_STARTED), 1, address, port))
+			socket?.send(DatagramPacket(byteArrayOf(CONNECTION_STARTED, level), 2, address, port))
 			sendPacketTime = System.currentTimeMillis()
 		}
 	}

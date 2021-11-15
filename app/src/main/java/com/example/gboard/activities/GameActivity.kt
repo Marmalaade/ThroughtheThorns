@@ -1,6 +1,10 @@
 package com.example.gboard.activities
 
+import android.content.Context
 import android.graphics.Color
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
+import android.net.NetworkRequest
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -13,6 +17,7 @@ import com.example.gboard.data.Levels
 import com.example.gboard.R
 import com.example.gboard.data.Action
 import com.example.gboard.data.Network
+import com.example.gboard.ext.isInternetAvailable
 import com.example.gboard.players.GamePlayer
 import com.example.gboard.players.Snake
 import kotlinx.android.synthetic.main.activity_game.*
@@ -20,6 +25,33 @@ import java.net.DatagramPacket
 import java.nio.ByteBuffer
 
 class GameActivity : GboardActivity() {
+
+	private var internetReceiver: MenuConnectionStateMonitor? = null
+
+	inner class MenuConnectionStateMonitor : ConnectivityManager.NetworkCallback() {
+		private val connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+		private val networkRequest = NetworkRequest.Builder()
+			.addTransportType(NetworkCapabilities.TRANSPORT_CELLULAR)
+			.addTransportType(NetworkCapabilities.TRANSPORT_WIFI)
+			.build()
+
+		private var isConnected = isInternetAvailable()
+
+		override fun onAvailable(network: android.net.Network) {
+			super.onAvailable(network)
+			isConnected = true
+		}
+
+		override fun onUnavailable() {
+			super.onUnavailable()
+			isConnected = false
+			Toast.makeText(this@GameActivity, getText(R.string.error_internet_connection), Toast.LENGTH_SHORT).show()
+			this@GameActivity.finish()
+		}
+
+		fun registerNetworkCallback() = connectivityManager.registerNetworkCallback(networkRequest, this)
+		fun unregisterNetworkCallback() = connectivityManager.unregisterNetworkCallback(this)
+	}
 
 	private val levels by lazy {
 		Levels()
@@ -86,6 +118,16 @@ class GameActivity : GboardActivity() {
 	override fun onDestroy() {
 		super.onDestroy()
 		Network.disconnect()
+	}
+
+	override fun onResume() {
+		super.onResume()
+		(internetReceiver ?: MenuConnectionStateMonitor().also { internetReceiver = it }).registerNetworkCallback()
+	}
+
+	override fun onPause() {
+		super.onPause()
+		internetReceiver?.unregisterNetworkCallback()
 	}
 
 	override fun onWindowFocusChanged(hasFocus: Boolean) {

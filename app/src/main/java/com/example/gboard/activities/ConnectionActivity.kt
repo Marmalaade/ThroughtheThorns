@@ -55,7 +55,7 @@ class ConnectionActivity : GboardActivity() {
 				Network.ping.onChange.remove(this)
 			}
 		})
-		Network.sendRequestToServer()
+		Network.sendRequestToServer(level.toByte())
 		Network.receiveMessage()
 	}
 

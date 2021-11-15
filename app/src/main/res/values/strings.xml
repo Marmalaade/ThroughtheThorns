@@ -1,3 +1,4 @@
 <resources>
 	<string name="app_name">Gboard</string>
+	<string name="error_internet_connection">Enable your internet connection</string>
 </resources>

@@ -9,10 +9,12 @@ import android.view.*
 import android.view.animation.LinearInterpolator
 import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import com.example.gboard.*
 import com.example.gboard.data.Settings
+import com.example.gboard.ext.isInternetAvailable
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.custom_dialog.*
 import kotlinx.android.synthetic.main.options_dialog.*
@@ -47,12 +49,14 @@ class MainActivity : GboardActivity(), CoroutineScope {
 				dismiss()
 			}
 			startMultiPlayer.setOnClickListener {
-				startActivity(
-					Intent(it.context, ConnectionActivity::class.java)
-						.putExtra("Level", selectedLevel)
-						.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
-				)
-				dismiss()
+				if(isInternetAvailable()) {
+					startActivity(
+						Intent(it.context, ConnectionActivity::class.java)
+							.putExtra("Level", selectedLevel)
+							.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+					)
+					dismiss()
+				} else Toast.makeText(this@MainActivity, getText(R.string.error_internet_connection), Toast.LENGTH_SHORT).show()
 			}
 		}
 	}
