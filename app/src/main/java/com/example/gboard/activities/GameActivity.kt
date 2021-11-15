@@ -73,7 +73,7 @@ class GameActivity : GboardActivity() {
 		Log.e("Multiplayer", "$isMultiplayer")
 		setBackground(level)
 
-		if(isMultiplayer) {
+		if (isMultiplayer) {
 			Network.waitGameStartFlag()
 			Network.startGameFlag.onChange.add(object : Action<Byte> {
 				override fun run(result: Byte) {
@@ -104,7 +104,12 @@ class GameActivity : GboardActivity() {
 
 		gameView.level = levels.getLevel(0/*level*/)
 		gameView.isMultiplayer = isMultiplayer
-		gameView.players = if(isMultiplayer) multiPlayerSnakes else snakes//arrayOf(Snake(), Snake())
+		gameView.players = if (isMultiplayer) multiPlayerSnakes else snakes//arrayOf(Snake(), Snake())
+
+
+		back_button.setOnClickListener {
+			finish()
+		}
 	}
 
 	private fun setBackground(index: Int) {
