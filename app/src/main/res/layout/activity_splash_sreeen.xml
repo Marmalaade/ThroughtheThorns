@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
-	android:id="@+id/splashbg"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	android:background="@drawable/splashscreen"
 	tools:context=".activities.SplashScreen">
 
-	<ProgressBar
-		android:id="@+id/progressBar"
-		style="?android:attr/progressBarStyleInverse"
-		android:layout_width="240dp"
-		android:layout_height="40dp"
-		android:backgroundTint="@color/black"
-		android:indeterminateTint="@color/loading_bar"
+	<com.airbnb.lottie.LottieAnimationView
+		android:id="@+id/load_view"
+		android:layout_width="100dp"
+		android:layout_height="100dp"
 		android:layout_gravity="bottom |center_horizontal"
-		android:layout_marginBottom="20dp"
-		android:progressDrawable="@drawable/custom_progress_bar" />
+		android:layout_marginTop="200dp"
+		app:lottie_autoPlay="true"
+		app:lottie_fileName="loader.json"
+		app:lottie_loop="true"
+		app:lottie_speed="1" />
+
 </FrameLayout>

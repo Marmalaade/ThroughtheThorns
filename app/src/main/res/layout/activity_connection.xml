@@ -1,28 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:orientation="vertical"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	android:background="@drawable/background">
+	android:background="@drawable/background"
+	android:orientation="vertical">
 
 	<com.example.gboard.font.AppFontTextView
 		android:id="@+id/status_text"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_gravity="center"
+		android:layout_marginBottom="100dp"
+		android:shadowColor="@color/black"
+		android:shadowDx="4"
+		android:shadowDy="4"
+		android:shadowRadius="2"
+		android:text="Connecting to server..."
 		android:textColor="@color/black"
-		android:textSize="32dp"
-		android:text="Connecting to server..."/>
+		android:textSize="32dp" />
 
 	<com.example.gboard.font.AppFontTextView
 		android:id="@+id/ping_text"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_gravity="center"
-		android:visibility="invisible"
 		android:layout_marginTop="40dp"
+		android:layout_marginBottom="100dp"
+		android:shadowColor="@color/black"
+		android:shadowDx="4"
+		android:shadowDy="4"
+		android:shadowRadius="2"
+		android:text="Your ping: "
 		android:textColor="@color/black"
 		android:textSize="32dp"
-		android:text="Your ping: "/>
+		android:visibility="invisible" />
+
+	<com.airbnb.lottie.LottieAnimationView
+		android:id="@+id/progressBar"
+		android:layout_width="match_parent"
+		android:layout_height="320dp"
+		android:layout_gravity="center"
+		android:layout_marginTop="100dp"
+		app:lottie_autoPlay="true"
+		app:lottie_fileName="loader.json"
+		app:lottie_loop="true"
+		app:lottie_speed="0.7" />
 
 </FrameLayout>

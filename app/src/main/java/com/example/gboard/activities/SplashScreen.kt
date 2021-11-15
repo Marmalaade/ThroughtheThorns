@@ -23,20 +23,10 @@ class SplashScreen : GboardActivity() {
 
 	private fun progressBarLoading() {
 		val intent = Intent(this, MainActivity::class.java)
-		var counter = 0
-		val limitValue = 100
-		val timer = Timer()
-		timer.schedule(object : TimerTask() {
-			override fun run() {
-				counter++
-				progressBar.progress = counter
-				if (counter > limitValue) {
-					timer.cancel()
-					startActivity(intent)
-					finish()
-				}
-			}
-		}, 4, 10)
+		load_view.postDelayed({
+			startActivity(intent)
+			finish()
+		}, 2600)
 	}
 
 	override fun onWindowFocusChanged(hasFocus: Boolean) {

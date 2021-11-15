@@ -13,16 +13,16 @@
 		android:layout_height="100dp"
 		android:layout_alignParentTop="true"
 		android:layout_centerHorizontal="true"
+		android:layout_marginBottom="20dp"
 		android:src="@drawable/tittle" />
 
 	<androidx.viewpager2.widget.ViewPager2
 		android:id="@+id/pager_level_slider"
 		android:layout_width="match_parent"
 		android:layout_height="230dp"
-		android:layout_below="@id/gameTittle"
-		android:layout_centerHorizontal="true"
+		android:layout_centerInParent="true"
 		android:paddingStart="250dp"
-		android:paddingEnd="250dp"></androidx.viewpager2.widget.ViewPager2>
+		android:paddingEnd="250dp" />
 
 	<ImageView
 		android:id="@+id/coin"

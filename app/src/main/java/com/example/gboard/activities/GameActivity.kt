@@ -43,7 +43,6 @@ class GameActivity : GboardActivity() {
 
 		if(isMultiplayer) {
 			Network.waitGameStartFlag()
-
 			Network.startGameFlag.onChange.add(object : Action<Byte> {
 				override fun run(result: Byte) {
 					multiPlayerSnakes[1].setRunning(true)
