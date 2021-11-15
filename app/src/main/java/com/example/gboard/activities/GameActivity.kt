@@ -8,6 +8,7 @@ import android.view.View
 import android.view.WindowInsets
 import android.view.WindowInsetsController
 import android.view.WindowManager
+import android.widget.Toast
 import com.example.gboard.data.Levels
 import com.example.gboard.R
 import com.example.gboard.data.Action
@@ -61,6 +62,10 @@ class GameActivity : GboardActivity() {
 							multiPlayerSnakes[1].setSin(sin)
 							Network.receiveMessage()
 						}
+						Network.CONNECTION_END -> {
+							Toast.makeText(this@GameActivity, "Player disconnected", Toast.LENGTH_SHORT).show()
+							finish()
+						}
 					}
 				}
 			})
@@ -77,6 +82,11 @@ class GameActivity : GboardActivity() {
 			1 -> game_layout.setBackgroundResource(R.drawable.desert)
 			2 -> game_layout.setBackgroundResource(R.drawable.jungle)
 		}
+	}
+
+	override fun onDestroy() {
+		super.onDestroy()
+		Network.disconnect()
 	}
 
 	override fun onWindowFocusChanged(hasFocus: Boolean) {

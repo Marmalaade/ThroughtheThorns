@@ -45,7 +45,6 @@ class MainActivity : GboardActivity(), CoroutineScope {
 						.putExtra("Level", selectedLevel)
 				)
 				dismiss()
-				finish()
 			}
 			startMultiPlayer.setOnClickListener {
 				startActivity(
@@ -54,7 +53,6 @@ class MainActivity : GboardActivity(), CoroutineScope {
 						.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
 				)
 				dismiss()
-				finish()
 			}
 		}
 	}
