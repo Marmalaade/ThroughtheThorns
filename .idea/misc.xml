@@ -4,14 +4,15 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.1" />
+        <entry key="..\:/SoftProgramms/ASprojects/SnakeOrNotSnake/app/src/main/res/drawable/ic_exit_icon.xml" value="0.165625" />
         <entry key="..\:/SoftProgramms/ASprojects/SnakeOrNotSnake/app/src/main/res/drawable/ic_play_button.xml" value="0.165625" />
         <entry key="..\:/SoftProgramms/ASprojects/SnakeOrNotSnake/app/src/main/res/drawable/ic_play_button_svgrepo_com.xml" value="0.2755208333333333" />
         <entry key="..\:/SoftProgramms/ASprojects/SnakeOrNotSnake/app/src/main/res/drawable/ic_setting_icon.xml" value="0.2755208333333333" />
-        <entry key="..\:/SoftProgramms/ASprojects/SnakeOrNotSnake/app/src/main/res/layout/activity_connection.xml" value="0.15715579710144928" />
+        <entry key="..\:/SoftProgramms/ASprojects/SnakeOrNotSnake/app/src/main/res/layout/activity_connection.xml" value="0.2" />
         <entry key="..\:/SoftProgramms/ASprojects/SnakeOrNotSnake/app/src/main/res/layout/activity_game.xml" value="0.1621376811594203" />
         <entry key="..\:/SoftProgramms/ASprojects/SnakeOrNotSnake/app/src/main/res/layout/activity_main.xml" value="0.176" />
         <entry key="..\:/SoftProgramms/ASprojects/SnakeOrNotSnake/app/src/main/res/layout/activity_splash_sreeen.xml" value="0.1621376811594203" />
-        <entry key="..\:/SoftProgramms/ASprojects/SnakeOrNotSnake/app/src/main/res/layout/custom_dialog.xml" value="0.1621376811594203" />
+        <entry key="..\:/SoftProgramms/ASprojects/SnakeOrNotSnake/app/src/main/res/layout/custom_dialog.xml" value="0.264" />
         <entry key="..\:/SoftProgramms/ASprojects/SnakeOrNotSnake/app/src/main/res/layout/options_dialog.xml" value="0.264" />
         <entry key="..\:/SoftProgramms/ASprojects/SnakeOrNotSnake/app/src/main/res/layout/slide_item_container.xml" value="0.1621376811594203" />
         <entry key="app/src/main/res/drawable/anim_volume_off_to_on.xml" value="0.14114583333333333" />

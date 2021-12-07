@@ -12,9 +12,12 @@ import com.example.gboard.data.Action
 import com.example.gboard.data.Network
 import kotlinx.android.synthetic.main.activity_connection.*
 import java.net.DatagramPacket
+import java.util.*
 
 class ConnectionActivity : GboardActivity() {
 	private var level = 0
+
+	private val timer = Timer()
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
@@ -55,8 +58,26 @@ class ConnectionActivity : GboardActivity() {
 				Network.ping.onChange.remove(this)
 			}
 		})
+
 		Network.sendRequestToServer(level.toByte())
 		Network.receiveMessage()
+
+		back_button.setOnClickListener {
+			finish()
+		}
+
+		timer.schedule(object : TimerTask() {
+			override fun run() {
+				pointAnimation()
+			}
+		}, 1000, 1000)
+	}
+
+	private val points = "..."
+	private fun pointAnimation() {
+		points_text.post {
+			points_text.text = if (points_text.text.length == 3) "" else points.substring(0, points_text.text.length + 1)
+		}
 	}
 
 	private fun openGame() {
@@ -73,6 +94,11 @@ class ConnectionActivity : GboardActivity() {
 	override fun onBackPressed() {
 		super.onBackPressed()
 		Network.disconnect()
+	}
+
+	override fun onDestroy() {
+		super.onDestroy()
+		timer.cancel()
 	}
 
 	override fun onWindowFocusChanged(hasFocus: Boolean) {
