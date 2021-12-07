@@ -26,7 +26,7 @@ class SplashScreen : GboardActivity() {
 		load_view.postDelayed({
 			startActivity(intent)
 			finish()
-		}, 2600)
+		}, 600)
 	}
 
 	override fun onWindowFocusChanged(hasFocus: Boolean) {

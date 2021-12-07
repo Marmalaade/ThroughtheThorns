@@ -10,16 +10,20 @@
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
 		android:adjustViewBounds="true"
+		android:clickable="true"
+		android:focusable="true"
 		android:soundEffectsEnabled="false"
 		app:riv_corner_radius="12dp" />
 
 	<ImageButton
 		android:id="@+id/playButton"
 		android:layout_width="100dp"
-		android:layout_marginBottom="10dp"
 		android:layout_height="100dp"
 		android:layout_gravity="center"
 		android:layout_marginTop="8dp"
-		android:background="@drawable/ic_play_button" />
+		android:layout_marginBottom="10dp"
+		android:background="@drawable/ic_play_button"
+		android:clickable="false"
+		android:focusable="false" />
 
 </FrameLayout>

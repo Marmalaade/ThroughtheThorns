@@ -50,7 +50,7 @@ class ConnectionActivity : GboardActivity() {
 			override fun run(result: Long) {
 				ping_text.post {
 					ping_text.visibility = View.VISIBLE
-					ping_text.text = "You ping: ${result / 1000f} ms"
+					ping_text.text = "Your ping: ${result / 1000f} ms"
 				}
 				Network.ping.onChange.remove(this)
 			}

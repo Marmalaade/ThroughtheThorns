@@ -3,6 +3,7 @@ package com.example.gboard
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.*
+import android.graphics.drawable.Drawable
 import android.os.Build
 import android.util.AttributeSet
 import android.view.MotionEvent
@@ -24,6 +25,13 @@ class GameView : View {
 	var players: Array<GamePlayer>? = null
 	var level: Array<GameObject>? = null
 	var isMultiplayer = false
+	var levelMap: Drawable? = null
+
+	var appleColor: Int = 0
+	var finishColor: Int = 0
+	var wallColor: Int = 0
+
+	var onFinishAction: () -> Unit = {}
 
 	init {
 		setWillNotDraw(false)
@@ -40,13 +48,7 @@ class GameView : View {
 					it.onMeasure(width, height)
 				}
 
-				var currX = width / (2f * players!![0].getHeight())
-				var currY = height / (2f * players!![0].getHeight()) - level!![0].getHeight() / 2f
-				level!!.forEach {
-					it.setPosition(currX, currY)
-					currX = it.getX2()
-					currY = it.getY2()
-				}
+				levelMap?.setBounds((width * 0.25f).toInt(), -height * 3, width * 4, height * 4)
 				isFirstDraw = false
 			}
 
@@ -54,31 +56,45 @@ class GameView : View {
 				val newX = -players!![0].getX() + width / 2f
 				val newY = -players!![0].getY() + height / 2f
 				canvas.translate(newX, newY)
-			} else if (players!![0].isDisappear()) players!![0].create(width / 2f, height / 2f)
+			} else if (players!![0].isDisappear() && !players!![0].isFinished()) {
+				players!![0].create(width / 2f, height / 2f)
+				if (isMultiplayer)
+					Network.sendRespawnFlag()
+			}
 
 			super.onDraw(canvas)
 
-			level!!.forEach {
-				it.draw(canvas, players!![0].getHeight())
-			}
+			levelMap?.draw(canvas)
+//			level!!.forEach {
+//				it.draw(canvas, players!![0].getHeight())
+//			}
 
 			players!!.forEach {
 				it.draw(canvas)
 			}
 
+			if (!isMultiplayer && players!![0].isFinished() && players!![0].isDisappear()) {
+				onFinishAction()
+			}
+
 			if (!players!![0].isDisappear() && players!![0].isRunning()) {
 				if (Build.VERSION.SDK_INT > Build.VERSION_CODES.O) {
-					/*buildDrawingCache()
-					val bitmap = getDrawingCache(true)
-					if (bitmap != null) {
-						players!![0].isCollided(bitmap, Color.BLACK)
+					getBitmap {
+						players!![0].isCollided(it, wallColor, appleColor, finishColor)
+						it.recycle()
 					}
-					destroyDrawingCache()
-				} else {*/
-//					getBitmap {
-//						players!![0].isCollided(it, Color.BLACK)
-//						it.recycle()
-//					}
+				}
+				if (isMultiplayer) {
+					if (players!![0].isCollided()) {
+						Network.sendCollidedFlag()
+					}
+					if (players!![0].isVelocityChanged()) {
+						Network.sendVelocity(players!![0].getVelocity())
+					}
+					if (players!![0].isFinished()) {
+						Network.sendFinishFlag()
+						onFinishAction()
+					}
 				}
 			}
 
@@ -86,23 +102,56 @@ class GameView : View {
 		}
 	}
 
+	private var touchX = -1f
+	private var touchY = -1f
+
+	private var difX = 0f
+	private var difY = 0f
+
 	@SuppressLint("ClickableViewAccessibility")
 	override fun onTouchEvent(event: MotionEvent?): Boolean {
 		if (players != null) {
-			if (event?.actionMasked == MotionEvent.ACTION_DOWN) {
-				if (!players!![0].isRunning()) {
-					players!![0].setRunning(true)
-					if (isMultiplayer)
-						Network.sendStartFlag()
+			when (event?.actionMasked) {
+				MotionEvent.ACTION_DOWN -> {
+					touchX = event.x
+					touchY = event.y
+					if (!players!![0].isRunning()) {
+						players!![0].setRunning(true)
+						if (isMultiplayer) {
+							Network.sendStartFlag()
+						}
+					}
 				}
-			} else if (event?.actionMasked == MotionEvent.ACTION_MOVE) {
-				val difX = event.x - width / 2f
-				val difY = event.y - height / 2f
-				val len = sqrt(difX.pow(2) + difY.pow(2))
-				players!![0].setCos(difX / len)
-				players!![0].setSin(difY / len)
-				if (isMultiplayer)
-					Network.sendDirection(players!![0].getCos(), players!![0].getSin())
+
+				MotionEvent.ACTION_MOVE -> {
+					difX = event.x - width / 2f
+					difY = event.y - height / 2f
+					//if(abs(difX) >= 10f && abs(difY) >= 10f) {
+					val len = sqrt(difX.pow(2) + difY.pow(2))
+					//if (touchX >= 0f && touchY >= 0f && abs(difX) > 1f && abs(difY) > 1f) {
+					players!![0].setCos(difX / len)
+					players!![0].setSin(difY / len)
+					if (isMultiplayer)
+						Network.sendDirection(players!![0].getCos(), players!![0].getSin())
+					//}
+					//	difX = 0f
+					//	difY = 0f
+					//}
+					//touchX = event.x
+					//touchY = event.y
+				}
+
+				MotionEvent.ACTION_UP -> {
+					if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.O && !players!![0].isFinished()) {
+						if (isMultiplayer) {
+							players!![0].setFinished(true)
+							Network.sendFinishFlag()
+							onFinishAction()
+						}
+					}
+					touchX = -1f
+					touchY = -1f
+				}
 			}
 		}
 		return true

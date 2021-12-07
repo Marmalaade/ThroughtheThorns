@@ -15,4 +15,8 @@
 	<color name="yellow">#e3c502</color>
 	<color name="loading_bar">#b89002</color>
 
+	<color name="finish_color">#FB0000</color>
+	<color name="apple_color">#00FF7A</color>
+	<color name="wall_color">#000000</color>
+
 </resources>

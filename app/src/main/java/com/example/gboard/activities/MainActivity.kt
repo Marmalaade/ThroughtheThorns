@@ -2,6 +2,7 @@ package com.example.gboard.activities
 
 import android.app.Dialog
 import android.content.Intent
+import android.graphics.drawable.AnimatedVectorDrawable
 import android.media.MediaPlayer
 import android.os.Build
 import android.os.Bundle
@@ -18,22 +19,19 @@ import com.example.gboard.ext.isInternetAvailable
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.custom_dialog.*
 import kotlinx.android.synthetic.main.options_dialog.*
-import kotlinx.coroutines.*
-import kotlin.coroutines.CoroutineContext
 import kotlin.math.abs
 import kotlinx.android.synthetic.main.slide_item_container.*
 
+class MainActivity : GboardActivity() {
 
-class MainActivity : GboardActivity(), CoroutineScope {
-	private var job: Job = Job()
-	override val coroutineContext: CoroutineContext
-		get() = Dispatchers.Main + job
+	private var mediaPlayer: MediaPlayer? = null
 
-	private val mediaPlayer by lazy {
-		MediaPlayer.create(this, R.raw.menu_music).apply {
-
-			isLooping = true
+	private fun getMediaPlayer(): MediaPlayer {
+		if(mediaPlayer == null) {
+			mediaPlayer = MediaPlayer.create(this, R.raw.menu_music)
+			mediaPlayer!!.isLooping = true
 		}
+		return mediaPlayer!!
 	}
 
 	private val levelDialog by lazy {
@@ -49,7 +47,7 @@ class MainActivity : GboardActivity(), CoroutineScope {
 				dismiss()
 			}
 			startMultiPlayer.setOnClickListener {
-				if(isInternetAvailable()) {
+				if (isInternetAvailable()) {
 					startActivity(
 						Intent(it.context, ConnectionActivity::class.java)
 							.putExtra("Level", selectedLevel)
@@ -61,22 +59,20 @@ class MainActivity : GboardActivity(), CoroutineScope {
 		}
 	}
 
-	private val settingsDialog by lazy {
+	/*private val settingsDialog by lazy {
 		Dialog(this).apply {
 			window?.setBackgroundDrawableResource(android.R.color.transparent)
 			setContentView(R.layout.options_dialog)
 			music_checkbox.isChecked = Settings.soundEnabled
 			save_button.setOnClickListener {
-				Settings.snakeColor = color_seekbar.getColor()
 				Settings.soundEnabled = music_checkbox.isChecked
-				launch {
-					Settings.save(context)
-					playMusic(true)
-				}
+				Settings.save(context)
+				onSettingsChanged()
 				dismiss()
 			}
 		}
-	}
+	}*/
+
 	private val sliderAdapter by lazy {
 		val sliderItems: MutableList<SliderItem> = ArrayList()
 		sliderItems.add(SliderItem(R.drawable.arctic_named))
@@ -84,10 +80,20 @@ class MainActivity : GboardActivity(), CoroutineScope {
 		sliderItems.add(SliderItem(R.drawable.jungle_named))
 		SliderAdapter(sliderItems, pager_level_slider, object : OnPageClickListener {
 			override fun onPageClick(position: Int, sliderItem: SliderItem) {
-				when (position) {
-					0 -> showLevelDialog(0)
-					1 -> showLevelDialog(1)
-					2 -> showLevelDialog(2)
+				if(Settings.levelPurchases[position]) {
+					showLevelDialog(position)
+				} else {
+					if(Settings.coins > 0) {
+						Settings.coins -= 1
+						Settings.levelPurchases[position] = true
+						coin_text.text = "${Settings.coins}"
+						Settings.save(this@MainActivity)
+						showLevelDialog(position)
+						pager_level_slider.adapter?.notifyItemChanged(position)
+						Toast.makeText(this@MainActivity, "You have purchased this level", Toast.LENGTH_SHORT).show()
+					} else {
+						Toast.makeText(this@MainActivity, "Not enough money", Toast.LENGTH_SHORT).show()
+					}
 				}
 			}
 		})
@@ -116,29 +122,22 @@ class MainActivity : GboardActivity(), CoroutineScope {
 
 		coin.setOnClickListener {
 			flipCoin()
-			coin_nubmer.text = (0..10).random().toString()
 		}
-		settings_button.setOnClickListener {
-			scaleAnimation(settings_button)
-			settingsDialog.show()
+
+		Settings.load(this)
+
+		settings_button.apply {
+			setImageResource(R.drawable.anim_volume_on_to_off)
+		}.setOnClickListener {
+			Settings.soundEnabled = !Settings.soundEnabled
+			playMusic(Settings.soundEnabled)
+			Settings.save(it.context)
+			(it as ImageButton).setImageResource(if (!Settings.soundEnabled) R.drawable.anim_volume_on_to_off else R.drawable.anim_volume_off_to_on)
+			it.post {
+				(settings_button.drawable as? AnimatedVectorDrawable)?.start()
+			}
 		}
 		staticCoinflip()
-	}
-
-	private fun scaleAnimation(imageButton: ImageButton) {
-		imageButton.animate().apply {
-			duration = 150
-			scaleX(1.5f)
-			scaleY(1.5f)
-			startDelay = 15
-		}.withEndAction {
-			imageButton.animate().apply {
-				duration = 150
-				scaleX(1.0f)
-				scaleY(1.0f)
-				startDelay = 30
-			}
-		}.start()
 	}
 
 	private fun staticCoinflip() {
@@ -186,27 +185,22 @@ class MainActivity : GboardActivity(), CoroutineScope {
 
 	override fun onResume() {
 		super.onResume()
-		launch {
-			Settings.load(applicationContext)
-			onSettingsChanged()
-		}
-	}
-
-	override fun onDestroy() {
-		super.onDestroy()
-		job.cancel()
+		Settings.load(applicationContext)
+		onSettingsChanged()
 	}
 
 	private fun onSettingsChanged() {
-		playMusic(true)
+		playMusic(Settings.soundEnabled)
+		coin_text.text = "${Settings.coins}"
 	}
 
 	private fun playMusic(value: Boolean) {
-		if (value && Settings.soundEnabled && !mediaPlayer!!.isPlaying) {
-			mediaPlayer!!.start()
-		} else if (mediaPlayer!!.isPlaying) {
-			mediaPlayer!!.pause()
-			mediaPlayer!!.release()
+		if (value && Settings.soundEnabled && !getMediaPlayer().isPlaying) {
+			getMediaPlayer().start()
+		} else if (getMediaPlayer().isPlaying) {
+			getMediaPlayer().pause()
+			getMediaPlayer().release()
+			mediaPlayer = null
 		}
 	}
 

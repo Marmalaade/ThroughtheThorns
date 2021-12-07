@@ -17,7 +17,17 @@ interface GamePlayer {
 	fun getSize(): Int // number of snake fragments (lines array length)
 	fun isRunning(): Boolean
 	fun isDisappear(): Boolean
+	fun setDisappear(value: Boolean)
 	fun setRunning(value: Boolean)
-	fun isCollided(bitmap: Bitmap, color: Int): Boolean
+	fun setCollided()
+	fun setIsMultiplayer()
+	fun setVelocity(value: Float)
+	fun getVelocity(): Float
+	fun respawn()
+	fun setFinished(value: Boolean)
+	fun isFinished(): Boolean
+	fun isVelocityChanged(): Boolean
+	fun isCollided(): Boolean
+	fun isCollided(bitmap: Bitmap, wallColor: Int, appleColor: Int, finishColor: Int): Boolean
 	fun onMeasure(measuredWidth: Int, measuredHeight: Int)
 }
